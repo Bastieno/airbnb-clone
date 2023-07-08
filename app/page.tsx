@@ -4,6 +4,7 @@ import Container from './components/Container';
 
 import AppActions from './components/AppActions';
 import Listings from './components/listings/Listings';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Listings />
       </Container>
       <AppActions />
+      <Footer />
     </>
   );
 }

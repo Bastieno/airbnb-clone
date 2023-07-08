@@ -6,6 +6,12 @@ body {
   font-size: 0.75rem;
 }
 
+.with-dot::before {
+  content: "•";
+  padding-right: 4px;
+  color: black;
+}
+
 @media (max-width:568px) {
   .show {
     display: flex;
