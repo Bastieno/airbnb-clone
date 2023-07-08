@@ -1,48 +1,18 @@
-'use client'
-import useScrollDirection from './hooks/useScrollDirection';
+'use client';
+import Navbar from './components/navbar/Navbar';
+import Container from './components/Container';
 
-function HeaderContent() {
-  return (
-    <header>
-      <h1>Fixed Header</h1>
-    </header>
-  );
-}
-
-function ActionContent() {
-  const scrollDir = useScrollDirection();
-  const show = scrollDir === 'up' ? 'show' : '';
-
-  return (
-    <div
-      className={`action-content text-sm p-5 text-white bg-[#333] ${show}`}
-    >
-      Fixed Action Content
-    </div>
-  );
-}
-
-function PageContent() {
-  return (
-    <main>
-      <div className='content'>
-        <h2>Scrollable Body Content</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-          ullamcorper elit vel tellus venenatis, eget mattis dolor posuere.
-          Praesent sed fermentum turpis, et semper elit.
-        </p>
-      </div>
-    </main>
-  );
-}
+import AppActions from './components/AppActions';
+import Listings from './components/listings/Listings';
 
 export default function Home() {
   return (
     <>
-      <HeaderContent/>
-      <PageContent />
-      <ActionContent />
+      <Navbar />
+      <Container>
+        <Listings />
+      </Container>
+      <AppActions />
     </>
   );
 }
