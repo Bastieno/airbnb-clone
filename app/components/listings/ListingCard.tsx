@@ -21,6 +21,7 @@ export type Listing = {
 };
 
 export default function ListingCard({
+  id,
   img,
   location,
   price,
@@ -40,7 +41,7 @@ export default function ListingCard({
             alt={location}
           />
           <div className='absolute top-3 right-3'>
-            <HeartButton />
+            <HeartButton listingId={id} />
           </div>
         </div>
         <div className='mt-2'>
