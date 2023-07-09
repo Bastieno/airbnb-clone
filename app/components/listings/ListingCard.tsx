@@ -2,18 +2,21 @@ import Image from 'next/image';
 import HeartButton from './HeartButton';
 
 import { AiFillStar } from 'react-icons/ai';
-import { Stringifiable } from 'query-string';
 
-type ListingCardProps = {
-  id: number;
-  title: string;
-  description: string;
+export type Listing = {
+  id: string;
+  host: {
+    name: string;
+    gender: string;
+    age: number;
+  };
   img: string;
   location: string;
+  availability: string;
   price: number;
   rating: number;
   distance: string;
-  availability: string;
+  category: string;
   timeOfDay: string;
 };
 
@@ -25,7 +28,7 @@ export default function ListingCard({
   availability,
   timeOfDay,
   rating,
-}: ListingCardProps) {
+}: Listing) {
   return (
     <div className='col-span-1 cursor-pointer'>
       <div className='flex flex-col w-full'>
