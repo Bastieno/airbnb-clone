@@ -56,33 +56,30 @@ export const getGuid = () =>
     return v.toString(16);
   });
 
-type Fn = (index?: number) => Promise<Array<Listing>>;
+type Fn = () => Promise<Array<Listing>>;
 
-export const fetchListings: Fn = (startIndex = 0) => {
+export const fetchListings: Fn = () => {
   const promise: Promise<Listing[]> = new Promise((resolve) => {
     setTimeout(() => {
-      resolve(
-        startIndex >= 150
-          ? []
-          : Array.from({ length: 10 }).map((_, i) => {
-              return {
-                id: getGuid(),
-                host: {
-                  name: hostNames[randomInt(0, 5)],
-                  gender: genders[randomInt(0, 2)],
-                  age: randomInt(20, 80),
-                },
-                img: images[randomInt(0, 5)],
-                location: locations[randomInt(0, 5)],
-                availability: availabilities[randomInt(0, 5)],
-                price: prices[randomInt(0, 5)],
-                rating: ratings[randomInt(0, 5)],
-                distance: distances[randomInt(0, 5)],
-                category: categories[randomInt(0, 5)],
-                timeOfDay: 'night',
-              };
-            })
-      );
+      const data = Array.from({ length: 10 }).map((_, i) => {
+        return {
+          id: getGuid(),
+          host: {
+            name: hostNames[randomInt(0, 5)],
+            gender: genders[randomInt(0, 2)],
+            age: randomInt(20, 80),
+          },
+          img: images[randomInt(0, 5)],
+          location: locations[randomInt(0, 5)],
+          availability: availabilities[randomInt(0, 5)],
+          price: prices[randomInt(0, 5)],
+          rating: ratings[randomInt(0, 5)],
+          distance: distances[randomInt(0, 5)],
+          category: categories[randomInt(0, 5)],
+          timeOfDay: 'night',
+        };
+      });
+      resolve(data);
     }, randomInt(1, 3) * 1000);
   });
   return promise;

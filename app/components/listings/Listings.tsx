@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { useEffect, useState, useRef, useCallback } from 'react';
 
@@ -14,19 +13,20 @@ export default function Listings() {
   const [loading, setLoading] = useState(true);
   const [skeletonList, setSkeletonList] = useState<Array<number>>([]);
   const [list, setList] = useState<Array<Listing>>([]);
+  const dataLimit = 150;
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     setSkeletonList(initialSkeletonList);
-    const newData = await fetchListings(list.length);
+    const newData = await fetchListings();
     setList((data) => data.concat(newData));
     setSkeletonList([]);
     setLoading(false);
-  }, [list.length]);
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   // Create a ref and attach it to a node at the end of the listings
   // We observe this node using IntersectionObserver and
@@ -37,7 +37,7 @@ export default function Listings() {
     const observingNode = observerTarget.current;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && list.length < dataLimit) {
           fetchData();
         }
       },
@@ -53,7 +53,7 @@ export default function Listings() {
         observer.unobserve(observingNode);
       }
     };
-  }, [observerTarget]);
+  }, [fetchData, list.length, observerTarget]);
 
   return (
     <div
